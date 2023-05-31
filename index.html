@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Website</title>
+	<!-- Include Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+	<!-- Include custom CSS -->
+	<style>
+		.card {
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="card-columns" id="item-container">            
+		</div>
+	</div>
+
+	<!-- Include jQuery and Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<!-- Include custom JavaScript -->
+	<script>
+		$(document).ready(function() {
+			// Load data from JSON file
+			$.getJSON('data.json', function(data) {
+				// Iterate through items and create card-like HTML
+				$.each(data, function(index, item) {
+					var card = $('<div>', {'class': 'card'});
+					var cardBody = $('<div>', {'class': 'card-body'});
+					card.append(cardBody);
+					cardBody.append($('<h5>', {'class': 'card-title', text: item.Title}));
+                    cardBody.append($('<p>', {'class': 'card-text font-weight-bold', text: 'Speaker:' + item.Speaker}));    
+					cardBody.append($('<p>', {'class': 'card-text', text: item.description}));
+                    var urlLink = $('<a>', {'class': 'card-text', text: 'URL: ' + 'Teams Meeting', href: item.Link});
+			        cardBody.append(urlLink);    
+                    cardBody.append($('<p>', {'class': 'card-text', text: item.Time}));
+					$('#item-container').append(card);
+                    console.log(card)
+				});
+			});
+		});
+	</script>
+</body>
+</html>
